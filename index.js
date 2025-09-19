@@ -1,7 +1,12 @@
 const { Telegraf, Markup } = require("telegraf");
 require("dotenv").config();
 
-const bot = new Telegraf(process.env.BOT_TOKEN || "8214409326:AAHc8a4H2ZrjrG-fjbOJmb3UhUrz_Er2EKE");
+if (!process.env.BOT_TOKEN) {
+  console.error('❌ BOT_TOKEN is required! Please set it in your .env file');
+  process.exit(1);
+}
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const CONTRACT = "2wQ7b9uNdP7EUsKXguZqdD1PmrtBkoKwPCKySNMmpump";
 const CHART = "https://www.dextools.io/app/en/solana/pair-explorer/HMkm7wCrhsPK8cX9F7SmEYQrTQcJZmjiG7ceysZDLgiu?t=1758312203818";
