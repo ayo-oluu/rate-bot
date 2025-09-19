@@ -1,11 +1,19 @@
 const { Telegraf, Markup } = require("telegraf");
 require("dotenv").config();
 
+console.log('🔍 Debug: Checking environment variables...');
+console.log('BOT_TOKEN exists:', !!process.env.BOT_TOKEN);
+console.log('BOT_TOKEN length:', process.env.BOT_TOKEN ? process.env.BOT_TOKEN.length : 0);
+console.log('All env vars:', Object.keys(process.env).filter(key => key.includes('BOT') || key.includes('TOKEN')));
+
 if (!process.env.BOT_TOKEN) {
   console.error('❌ BOT_TOKEN is required! Please set it in your .env file');
+  console.error('Available environment variables:', Object.keys(process.env));
+  console.error('Make sure to set BOT_TOKEN in Railway dashboard under Variables tab');
   process.exit(1);
 }
 
+console.log('✅ BOT_TOKEN found, initializing bot...');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const CONTRACT = "2wQ7b9uNdP7EUsKXguZqdD1PmrtBkoKwPCKySNMmpump";
